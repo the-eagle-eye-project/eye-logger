@@ -4,11 +4,14 @@ This repository will host the API that will store and retrieve logs into Elastic
 ## Meta Logs Index Mapping
 ```
 PUT /meta-logs-idx
-{
+{ 
   "mappings": {
     "properties": {
       "transaction_id": {
         "type": "text"
+      },
+      "integration_id": {
+        "type" : "keyword"
       },
       "application_name": {
         "type": "text"

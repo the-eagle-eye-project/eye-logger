@@ -2,17 +2,19 @@ package com.theeagleeyeproject.eyelogger.model;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
 public class EyeLoggerServiceRequest {
 
-    private String transactionId;
+    @NotNull
+    private String integrationId;
 
-    private String applicationName;
+    @NotNull
+    private String e2eTransactionId;
 
-    private String applicationStep;
-
+    @NotNull
     private LocalDateTime eventTimestamp;
 
     private String requestBody;
@@ -21,6 +23,14 @@ public class EyeLoggerServiceRequest {
 
     private String sourceHost;
 
+    @NotNull
     private TransactionStatus transactionStatus;
+
+    @NotNull
+    private int transactionExecutionTimeMs;
+
+    private String transactionStatusCode;
+
+    private String transactionMessage;
 
 }
