@@ -11,12 +11,14 @@ public class EyeRegisterClient {
 
     private final WebClient.Builder webClientBuilder;
 
-    private EyeMetaClientResponse getMetadata(String integrationId) {
-        String baseUrl = "localhost:8081/eye/meta-register";
+    public EyeMetaClientResponse getMetadata(String integrationId) {
+        String baseUrl = "http://localhost:8081/eye/meta-register";
 
         String apiUrl = UriComponentsBuilder.fromHttpUrl(baseUrl)
                 .queryParam("integration_id", integrationId)
                 .toUriString();
+
+        // TODO: Add an object mapper to the client to accept the fields with snake case.
 
         return webClientBuilder.build()
                 .get()
