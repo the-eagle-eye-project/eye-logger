@@ -1,6 +1,7 @@
 package com.theeagleeyeproject.eyelogger.client;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,6 +24,7 @@ public class EyeRegisterClient {
         return webClientBuilder.build()
                 .get()
                 .uri(apiUrl)
+                .accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
                 .retrieve()
                 .bodyToMono(EyeMetaClientResponse.class)
                 .block();
