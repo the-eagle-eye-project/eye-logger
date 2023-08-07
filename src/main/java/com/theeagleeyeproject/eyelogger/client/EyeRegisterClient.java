@@ -1,25 +1,30 @@
 package com.theeagleeyeproject.eyelogger.client;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
+@Log4j2
 @RequiredArgsConstructor
 public class EyeRegisterClient {
 
     private final WebClient.Builder webClientBuilder;
 
-    public EyeMetaClientResponse getMetadata(String integrationId) {
-        String baseUrl = "http://localhost:8081/eye/meta-register";
+    @Value("${eye.registry.host}")
+    private String eyeRegistryHost;
 
-        String apiUrl = UriComponentsBuilder.fromHttpUrl(baseUrl)
+    public EyeMetaClientResponse getMetadata(String integrationId) {
+
+        String apiUrl = UriComponentsBuilder.fromHttpUrl(eyeRegistryHost)
                 .queryParam("integration_id", integrationId)
                 .toUriString();
 
-        // TODO: Add an object mapper to the client to accept the fields with snake case.
+        log.info("URL Used to connect to Eye Registry: {}", apiUrl);
 
         return webClientBuilder.build()
                 .get()

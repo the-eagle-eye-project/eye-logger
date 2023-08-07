@@ -19,6 +19,7 @@
     </Appenders>
     <Loggers>
         <!-- Application -->
+        <Logger name="com.theeagleeyeproject.eyelogger.client.EyeRegisterClient" level="DEBUG"/>
 
         <!-- Spring and Hibernate -->
         <Logger name="org.hibernate" level="DEBUG"/>
