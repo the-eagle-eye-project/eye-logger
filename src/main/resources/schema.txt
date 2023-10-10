@@ -1,0 +1,58 @@
+use eye_logs;
+db;
+
+db.createCollection("eye_logs", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [
+                "transaction_id",
+                "application_name",
+                "application_step",
+                "event_timestamp",
+                "request_uri",
+                "source_host",
+                "transaction_status"
+            ],
+            properties: {
+                transaction_id: {
+                    bsonType: "string",
+                    description: "Unique ID used to identify and distinct from transactions."
+                },
+                application_name: {
+                    bsonType: "string",
+                    description: "Name of the application which this log belongs to."
+                },
+                application_step: {
+                    bsonType: "string",
+                    description: "Step of what this log belongs to."
+                },
+                event_timestamp: {
+                    bsonType: "date",
+                    description: "When the log was generated."
+                },
+                request_body: {
+                    bsonType: "string",
+                    description: "[OPTIONAL] API request body."
+                },
+                request_uri: {
+                    bsonType: "string",
+                    description: "Request URI must be a string."
+                },
+                source_host: {
+                    bsonType: "string",
+                    description: "Source host must be a string."
+                },
+                transaction_status: {
+                    bsonType: "string",
+                    description: "Status of the transaction. [SUCCESS, FAILED, NOT_COMPLETE]"
+                }
+            }
+        }
+    }
+});
+
+
+use eye_register;
+db;
+
